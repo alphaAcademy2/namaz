@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Monitor</title>
+
+  <script>
+    /*
+      ============================================
+      PRAYER MONITOR - GITHUB REDIRECT
+      ============================================
+    */
+
+    const WEB_APP_URL = "";
+
+    (function () {
+
+      // Current GitHub Pages path
+      const path = window.location.pathname;
+
+      // Expected:
+      // /namaz/1017
+      // /namaz/1044
+      const parts = path.split("/").filter(Boolean);
+
+      // Last part = Student ID
+      const studentId = parts.length ? parts[parts.length - 1] : "";
+
+      if (!studentId || !/^\d+$/.test(studentId)) {
+        document.addEventListener("DOMContentLoaded", function () {
+          document.body.innerHTML = `
+            <div style="
+              font-family:Arial,sans-serif;
+              text-align:center;
+              padding:60px 20px;
+              color:#334155;
+            ">
+              <h2>Student ID ലഭ്യമല്ല</h2>
+              <p>QR Code link ശരിയല്ല.</p>
+            </div>
+          `;
+        });
+        return;
+      }
+
+      if (
+        !WEB_APP_URL ||
+        WEB_APP_URL.indexOf("PASTE_YOUR") !== -1
+      ) {
+        document.addEventListener("DOMContentLoaded", function () {
+          document.body.innerHTML = `
+            <div style="
+              font-family:Arial,sans-serif;
+              text-align:center;
+              padding:60px 20px;
+              color:#334155;
+            ">
+              <h2>Web App URL Not Configured</h2>
+              <p>404.html-ൽ Apps Script URL ചേർക്കുക.</p>
+            </div>
+          `;
+        });
+        return;
+      }
+
+      // Redirect to Google Apps Script
+      const target =
+        WEB_APP_URL.replace(/\/+$/, "") +
+        "?id=" +
+        encodeURIComponent(studentId);
+
+      window.location.replace(target);
+
+    })();
+  </script>
+</head>
+
+<body>
+  <div style="
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#475569;
+  ">
+    <div style="text-align:center;">
+      <div style="font-size:48px;">🕌</div>
+      <div style="margin-top:12px;font-weight:700;">
+        നിസ്കാരം മോണിറ്ററിംഗ്
+      </div>
+      <div style="margin-top:8px;font-size:14px;">
+        Opening...
+      </div>
+    </div>
+  </div>
+</body>
+</html>
