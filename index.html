@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Madrasa Prayer Monitor</title>
+</head>
+<body>
+<p>Opening Prayer Monitor...</p>
+<script>
+/*
+  Set the current Apps Script Web App URL here.
+  QR codes can point to this GitHub Pages URL.
+*/
+const WEB_APP_URL = 'PASTE_CURRENT_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+
+if (!id) {
+  document.body.textContent = 'Student ID missing.';
+} else if (!WEB_APP_URL || WEB_APP_URL.includes('PASTE_CURRENT')) {
+  document.body.textContent = 'Web App URL is not configured.';
+} else {
+  location.replace(WEB_APP_URL + '?id=' + encodeURIComponent(id));
+}
+</script>
+</body>
+</html>
